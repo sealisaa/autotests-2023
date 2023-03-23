@@ -9,6 +9,7 @@ import utils.User;
 import utils.UserData;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 public class LoginTest extends BaseTest {
     private final User user = UserData.user;
