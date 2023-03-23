@@ -1,3 +1,5 @@
+import org.hamcrest.CustomMatcher;
+import org.hamcrest.Matcher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -5,6 +7,8 @@ import pages.LoginPage;
 import pages.MainPage;
 import utils.User;
 import utils.UserData;
+
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class LoginTest extends BaseTest {
     private final User user = UserData.user;
@@ -19,12 +23,19 @@ public class LoginTest extends BaseTest {
     @Test
     void loginTest() {
         mainPage = loginPage.login(user);
-        assert(mainPage.getName().startsWith(user.getFirstName())
-                && mainPage.getName().endsWith(user.getLastName()));
+        assertThat(mainPage.getName(), startsWith(user.getFirstName()));
+        assertThat(mainPage.getName(), endsWith(user.getLastName()));
     }
 
     @AfterEach
     public void setDown() {
 //        mainPage.logout();
     }
+
+    Matcher<String> validUserData = new CustomMatcher<String>("Корректные имя и фамилия") {
+        @Override
+        public boolean matches(Object o) {
+            return o.equals(user.getFirstName() + " " + user.getLastName());
+        }
+    };
 }
