@@ -26,6 +26,7 @@ public class LoginTest extends BaseTest {
         mainPage = loginPage.login(user);
         assertThat(mainPage.getName(), startsWith(user.getFirstName()));
         assertThat(mainPage.getName(), endsWith(user.getLastName()));
+        assertThat(mainPage.getName(), validUserData);
     }
 
     @AfterEach
