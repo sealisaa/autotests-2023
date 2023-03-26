@@ -20,7 +20,7 @@ public class FriendsListTest extends BaseTest {
     }
 
     @Test
-    void loginTest() {
+    void friendsListTest() {
         MainPage mainPage = loginPage.login(user);
         FriendsPage friendsPage = mainPage.goToFriendsPage();
         Map<String, FriendCardWrapper> userFriends = friendsPage.getUserFriends();

@@ -2,8 +2,6 @@ package pages;
 import com.codeborne.selenide.Condition;
 import org.openqa.selenium.By;
 
-import java.util.Map;
-
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -14,6 +12,7 @@ public class MainPage extends LoadablePage {
     private static final By LOGOUT = byXpath("//a[@data-l='t,logout']");
     private static final By SUBMIT_LOGOUT = byXpath("//input[@data-l='t,logout']");
     private static final By FRIENDS_BUTTON = byXpath("//a[contains(@data-l, 'userFriend')]");
+    private static final By GROUPS_BUTTON = byXpath("//a[contains(@data-l, 'userAltGroup')]");
 
     public MainPage() {
         checkPage();
@@ -27,7 +26,7 @@ public class MainPage extends LoadablePage {
                 .shouldBe(Condition.visible.because("Не отображаются верхнее меню"));
     }
 
-    public String getName() {
+    public String getUserName() {
         return $(NAME_FIELD)
                 .shouldBe(Condition.visible.because("Не отображаются имя и фамилия пользователя"))
                 .text();
@@ -50,5 +49,12 @@ public class MainPage extends LoadablePage {
                 .shouldBe(Condition.visible.because("Не отображается кнопка Друзья"))
                 .click();
         return new FriendsPage();
+    }
+
+    public GroupsPage goToGroupsPage() {
+        $(GROUPS_BUTTON)
+                .shouldBe(Condition.visible.because("Не отображается кнопка Группы"))
+                .click();
+        return new GroupsPage();
     }
 }
