@@ -1,8 +1,9 @@
 package pages;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+
+import java.util.Map;
+
 import static com.codeborne.selenide.Selectors.byXpath;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -12,6 +13,11 @@ public class MainPage extends LoadablePage {
     private static final By TOOLBAR_MENU = byXpath("//*[contains(@class, 'toolbar-menu')]");
     private static final By LOGOUT = byXpath("//a[@data-l='t,logout']");
     private static final By SUBMIT_LOGOUT = byXpath("//input[@data-l='t,logout']");
+    private static final By FRIENDS_BUTTON = byXpath("//a[contains(@data-l, 'userFriend')]");
+
+    public MainPage() {
+        checkPage();
+    }
 
     @Override
     void checkPage() {
@@ -37,5 +43,12 @@ public class MainPage extends LoadablePage {
         $(SUBMIT_LOGOUT)
                 .shouldBe(Condition.visible.because("Не отображается кнопка Выйти"))
                 .click();
+    }
+
+    public FriendsPage goToFriendsPage() {
+        $(FRIENDS_BUTTON)
+                .shouldBe(Condition.visible.because("Не отображается кнопка Друзья"))
+                .click();
+        return new FriendsPage();
     }
 }

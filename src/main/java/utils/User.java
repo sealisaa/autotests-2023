@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.List;
+
 public class User {
     private final String login;
     private final String password;
@@ -7,12 +9,15 @@ public class User {
     private final String firstName;
     private final String lastName;
 
-    public User(String firstName, String lastName, String login, String password) {
+    private final List<String> friends;
+
+    public User(String firstName, String lastName, String login, String password, List<String> friends) {
         this.firstName = firstName;
         this.lastName = lastName;
         name = firstName + " " + lastName;
         this.login = login;
         this.password = password;
+        this.friends = friends;
     }
 
     public String getLogin() {
@@ -33,5 +38,9 @@ public class User {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public List<String> getFriends() {
+        return friends;
     }
 }
