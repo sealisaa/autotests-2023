@@ -3,7 +3,6 @@ package pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import jdk.nashorn.internal.scripts.JO;
 import org.openqa.selenium.By;
 
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ public class GroupsPage extends LoadablePage {
     private static final By USER_GROUP_CARD = byXpath("//*[contains(@class, 'user-groups')]//*[contains(@data-l, 'groupCard')]");
     private static final By USER_GROUP_TITLE = byXpath(".//span");
     private static final By JOIN_GROUP_BUTTON = byXpath("//a[contains(@class, 'group-join_btn')]");
-    private static List<String> userGroups = new ArrayList<>();
+    private static final List<String> userGroups = new ArrayList<>();
 
     @Override
     void checkPage() {
