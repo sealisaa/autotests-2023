@@ -13,7 +13,7 @@ public class PostWrapper {
     private static final By POST_TEXT = byXpath(".//*[contains(@class, 'media-text_cnt_tx')]");
     private static final By POST_MUSIC_TITLE = byXpath(".//a[contains(@class, 'track-with-cover_name')]/span");
     private static final By FEED_MENU = byXpath(".//*[@class='feed_menu']");
-    private static final By DELETE_POST = byXpath(".//*[text()='Удалить заметку']");
+    private static final By DELETE_POST = byXpath(".//*[text()='Удалить']");
 
     public PostWrapper(SelenideElement post) {
         post.shouldBe(Condition.visible.because("Пост не отображается"));

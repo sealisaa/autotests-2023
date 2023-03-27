@@ -89,6 +89,7 @@ public class MainPage extends LoadablePage {
                 .shouldBe(Condition.visible.because("Не отображается кнопка Поделиться"))
                 .click();
         refresh();
+        $(POST).shouldBe(Condition.visible.because("Не отображаются посты"));
         ElementsCollection postCollection = $$(POST);
         for (SelenideElement post : postCollection) {
             post
