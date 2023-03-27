@@ -24,6 +24,7 @@ public class MusicPage extends LoadablePage {
     private static final By MUSIC_SEARCH_INPUT = byXpath("//header//wm-search-input/input");
     private static final By CLOSE_BUTTON = byXpath("//*[@id='music_layer_holder']/*[contains(@class, 'toolbar-layer_close')]");
     private static final By MY_MUSIC_HEADER = byXpath("//h1[text()='Моя музыка']");
+    private static final By SEARCH_RESULTS = byXpath("//*[@data-tsid='search_results']");
 
     private final Map<String, MusicWrapper> myMusic = new HashMap<>();
 
@@ -61,6 +62,8 @@ public class MusicPage extends LoadablePage {
                 .shouldBe(Condition.visible.because("Не отображается поле для поиска музыки"))
                 .setValue(music)
                 .pressEnter();
+        $(SEARCH_RESULTS)
+                .shouldBe(Condition.visible.because("Не отображаются результаты поиска"));
         return $$(MUSIC_TRACK)
                 .shouldBe(CollectionCondition.sizeNotEqual(0).because("Ни одного трека не найдено"))
                 .get(0);
