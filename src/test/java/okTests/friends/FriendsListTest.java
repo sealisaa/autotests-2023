@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.FriendsPage;
-import utils.FriendCardWrapper;
+import utils.wrappers.FriendCardWrapper;
 import utils.User;
 import utils.UserData;
 import java.util.Map;

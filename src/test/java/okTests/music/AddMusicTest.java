@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import pages.LoginPage;
 import pages.MainPage;
 import pages.MusicPage;
-import utils.MusicWrapper;
+import utils.wrappers.MusicWrapper;
 import utils.User;
 import utils.UserData;
 

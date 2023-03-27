@@ -1,4 +1,4 @@
-package utils;
+package utils.wrappers;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
