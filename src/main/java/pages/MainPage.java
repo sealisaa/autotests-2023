@@ -13,6 +13,7 @@ public class MainPage extends LoadablePage {
     private static final By SUBMIT_LOGOUT = byXpath("//input[@data-l='t,logout']");
     private static final By FRIENDS_BUTTON = byXpath("//a[contains(@data-l, 'userFriend')]");
     private static final By GROUPS_BUTTON = byXpath("//a[contains(@data-l, 'userAltGroup')]");
+    private static final By MUSIC_BUTTON = byXpath("//*[@id='hook_Block_MusicToolbarButton']");
 
     public MainPage() {
         checkPage();
@@ -56,5 +57,12 @@ public class MainPage extends LoadablePage {
                 .shouldBe(Condition.visible.because("Не отображается кнопка Группы"))
                 .click();
         return new GroupsPage();
+    }
+
+    public MusicPage goToMusicPage() {
+        $(MUSIC_BUTTON)
+                .shouldBe(Condition.visible.because("Не отображается кнопка перехода к музыке"))
+                .click();
+        return new MusicPage();
     }
 }
