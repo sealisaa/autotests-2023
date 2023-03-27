@@ -1,3 +1,5 @@
+package okTests;
+
 import org.hamcrest.CustomMatcher;
 import org.hamcrest.Matcher;
 import org.junit.jupiter.api.AfterEach;
