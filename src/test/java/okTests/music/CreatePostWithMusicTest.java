@@ -37,7 +37,7 @@ public class CreatePostWithMusicTest extends BaseTest {
 
     @Test
     void createPostWithMusicTest() {
-        mainPage.createPost(musicTitle, text);
+        mainPage = mainPage.createNewPost().createPostWithMusic(musicTitle, text);
         Post expectedPost = new Post.PostBuilder()
                 .setAuthor(user.getName())
                 .setText(text)
@@ -57,9 +57,9 @@ public class CreatePostWithMusicTest extends BaseTest {
 
     @AfterAll
     static void setDown() {
-//        PostWrapper post = mainPage.getPostByText(text);
-//        post.delete();
-//        musicPage = mainPage.goToMusicPage();
-//        musicPage.deleteAllMyMusic();
+        PostWrapper post = mainPage.getPostByText(text);
+        post.delete();
+        musicPage = mainPage.goToMusicPage();
+        musicPage.deleteAllMyMusic();
     }
 }

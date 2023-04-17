@@ -25,6 +25,7 @@ public class MusicPage extends LoadablePage {
     private static final By CLOSE_BUTTON = byXpath("//*[@id='music_layer_holder']/*[contains(@class, 'toolbar-layer_close')]");
     private static final By MY_MUSIC_HEADER = byXpath("//h1[text()='Моя музыка']");
     private static final By SEARCH_RESULTS = byXpath("//*[@data-tsid='search_results']");
+    private static final By SUBMIT_SEARCH = byXpath("//*[@class='submit-item']");
 
     private final Map<String, MusicWrapper> myMusic = new HashMap<>();
 
@@ -60,8 +61,10 @@ public class MusicPage extends LoadablePage {
     public void searchMusic(String music) {
         $(MUSIC_SEARCH_INPUT)
                 .shouldBe(Condition.visible.because("Не отображается поле для поиска музыки"))
-                .setValue(music)
-                .pressEnter();
+                .setValue(music);
+        $(SUBMIT_SEARCH)
+                .shouldBe(Condition.visible.because("Не отображается кнопка Показать все результаты"))
+                .click();
     }
 
     public void playMusic(SelenideElement music) {
@@ -80,7 +83,7 @@ public class MusicPage extends LoadablePage {
                 .text();
     }
 
-    public Map<String, MusicWrapper> getMyMusic() {
+    public void updateMyMusic() {
         ElementsCollection myMusicCollection = $$(MUSIC_TRACK);
         for (SelenideElement music : myMusicCollection) {
             music
@@ -88,14 +91,27 @@ public class MusicPage extends LoadablePage {
             MusicWrapper musicTrack = new MusicWrapper(music);
             myMusic.put(musicTrack.getMusicTitle(), musicTrack);
         }
+    }
+
+    public Map<String, MusicWrapper> getMyMusic() {
+        updateMyMusic();
         return myMusic;
     }
 
     public void deleteMusic(String musicTitle) {
+        updateMyMusic();
         myMusic.get(musicTitle).deleteFromMyMusic();
     }
 
     public void deleteAllMyMusic() {
+        updateMyMusic();
+        ElementsCollection myMusicCollection = $$(MUSIC_TRACK);
+        for (SelenideElement music : myMusicCollection) {
+            music
+                    .shouldBe(Condition.visible.because("Не отображается музыка"));
+            MusicWrapper musicTrack = new MusicWrapper(music);
+            myMusic.put(musicTrack.getMusicTitle(), musicTrack);
+        }
         for (MusicWrapper music : myMusic.values()) {
             music.deleteFromMyMusic();
         }

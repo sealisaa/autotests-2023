@@ -21,10 +21,6 @@ public class MainPage extends LoadablePage {
     private static final By GROUPS_BUTTON = byXpath("//a[contains(@data-l, 'userAltGroup')]");
     private static final By MUSIC_BUTTON = byXpath("//*[@id='hook_Block_MusicToolbarButton']");
     private static final By POST_FIELD = byXpath("//a[contains(@href, 'post')]");
-    private static final By POST_INPUT = byXpath("//*[@data-module='postingForm/mediaText']");
-    private static final By ADD_MUSIC_BUTTON = byXpath("//*[contains(@class, 'posting') and contains(@data-l, 'button.music')]");
-    private static final By ADD_BUTTON = byXpath("//a[contains(@class,'button') and text()='Добавить']");
-    private static final By SUBMIT_POSTING = byXpath("//*[contains(@class,'posting_submit')]");
     private static final By POST = byXpath(".//*[@class='feed']");
 
     private final List<PostWrapper> posts = new ArrayList<>();
@@ -64,30 +60,14 @@ public class MainPage extends LoadablePage {
         return new MusicPage();
     }
 
-    public void createPost(String music, String text) {
+    public NewPostPage createNewPost() {
         $(POST_FIELD)
                 .shouldBe(Condition.visible.because("Не отображается поле Напишите заметку"))
                 .click();
-        $(POST_INPUT)
-                .shouldBe(Condition.visible.because("Не отображается поле для ввода текста"))
-                .setValue(text);
-        $(ADD_MUSIC_BUTTON)
-                .shouldBe(Condition.visible.because("Не отображается кнопка добавления музыки в пост"))
-                .shouldBe(Condition.enabled.because("Кнопка добавления музыки в пост не активна"))
-                .click();
-        $(byXpath(getMusicXpath(music)))
-                .shouldBe(Condition.visible.because("Не отображается песня для поста"))
-                .click();
-        $(ADD_BUTTON)
-                .shouldBe(Condition.visible.because("Не отображается кнопка Добавить"))
-                .click();
-        $(SUBMIT_POSTING)
-                .shouldBe(Condition.visible.because("Не отображается кнопка Поделиться"))
-                .click();
-        updatePosts();
+        return new NewPostPage();
     }
 
-    public void updatePosts() {
+    public void getPosts() {
         $(POST).shouldBe(Condition.visible.because("Не отображаются посты"));
         ElementsCollection postCollection = $$(POST);
         for (SelenideElement post : postCollection) {
@@ -97,14 +77,11 @@ public class MainPage extends LoadablePage {
     }
 
     public PostWrapper getPostByText(String text) {
+        getPosts();
         return posts.stream()
                 .filter(post -> post.getText().equals(text))
                 .findFirst()
                 .orElse(null);
-    }
-
-    public String getMusicXpath(String music) {
-        return ("//*[contains(@class, 'track') and contains(@data-json, '" + music + "')]");
     }
 
     public void logout() {

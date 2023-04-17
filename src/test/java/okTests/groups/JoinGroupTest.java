@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import pages.GroupsPage;
 import pages.LoginPage;
 import pages.MainPage;
+import pages.MyGroupsPage;
 import utils.User;
 import utils.UserData;
 import java.util.List;
@@ -25,15 +26,13 @@ public class JoinGroupTest extends BaseTest {
     void joinGroupTest() {
         MainPage mainPage = loginPage.login(user);
         GroupsPage groupsPage = mainPage.goToGroupsPage();
-        List<String> userGroupsOld = groupsPage
-                .goToMyGroups()
-                .getUserGroups();
-        groupsPage
+        MyGroupsPage myGroupsPage = groupsPage.goToMyGroups();
+        List<String> userGroupsOld = myGroupsPage.getUserGroups();
+        myGroupsPage = myGroupsPage
                 .goToOfficialGroups()
-                .joinGroup();
-        List<String> userGroupsNew = groupsPage
-                .goToMyGroups()
-                .getUserGroups();
+                .joinGroup()
+                .goToMyGroups();
+        List<String> userGroupsNew = myGroupsPage.getUserGroups();
         assertThat(userGroupsNew.size())
                 .withFailMessage("Число групп не увеличилось")
                 .isEqualTo(userGroupsOld.size() + 1);

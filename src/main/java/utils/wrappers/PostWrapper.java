@@ -13,7 +13,7 @@ public class PostWrapper {
     private static final By POST_TEXT = byXpath(".//*[contains(@class, 'media-text_cnt_tx')]");
     private static final By POST_MUSIC_TITLE = byXpath(".//a[contains(@class, 'track-with-cover_name')]/span");
     private static final By FEED_MENU = byXpath(".//*[@class='feed_menu']");
-    private static final By DELETE_POST = byXpath(".//*[text()='Удалить']");
+    private static final By DELETE_POST = byXpath(".//*[text()='Удалить заметку']");
 
     public PostWrapper(SelenideElement post) {
         post.shouldBe(Condition.visible.because("Пост не отображается"));
@@ -47,7 +47,7 @@ public class PostWrapper {
                 .shouldBe(Condition.visible.because("Не отображается меню поста"))
                 .hover()
                 .$(DELETE_POST)
-                .shouldBe(Condition.visible.because("Не отображается кнопка Удалить пост"))
+                .shouldBe(Condition.visible.because("Не отображается кнопка Удалить заметку"))
                 .click();
     }
 }

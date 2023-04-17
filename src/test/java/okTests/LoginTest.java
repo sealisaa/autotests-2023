@@ -1,8 +1,6 @@
 package okTests;
 
 import customMatchers.IsValidUserData;
-import org.hamcrest.CustomMatcher;
-import org.hamcrest.Matcher;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
