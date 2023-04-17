@@ -60,6 +60,6 @@ public class CreatePostWithMusicTest extends BaseTest {
         PostWrapper post = mainPage.getPostByText(text);
         post.delete();
         musicPage = mainPage.goToMusicPage();
-        musicPage.deleteAllMyMusic();
+        musicPage.goToMyMusic().deleteAllMyMusic();
     }
 }

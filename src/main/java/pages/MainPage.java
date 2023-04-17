@@ -67,13 +67,18 @@ public class MainPage extends LoadablePage {
         return new NewPostPage();
     }
 
-    public void getPosts() {
+    public void updatePosts() {
         $(POST).shouldBe(Condition.visible.because("Не отображаются посты"));
         ElementsCollection postCollection = $$(POST);
         for (SelenideElement post : postCollection) {
             post.shouldBe(Condition.visible.because("Не отображается пост"));
             posts.add(new PostWrapper(post));
         }
+    }
+
+    public List<PostWrapper> getPosts() {
+        updatePosts();
+        return posts;
     }
 
     public PostWrapper getPostByText(String text) {
