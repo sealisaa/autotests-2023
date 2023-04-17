@@ -26,8 +26,8 @@ public class DeleteMusicTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         MainPage mainPage = loginPage.login(user);
         musicPage = mainPage.goToMusicPage();
-        musicPage.deleteAllMyMusic();
-        SelenideElement searchResult = musicPage.searchMusic(MUSIC_TITLE);
+        musicPage.goToMyMusic().deleteAllMyMusic();
+        SelenideElement searchResult = musicPage.getMusicFromSearch(MUSIC_TITLE);
         MusicWrapper musicTrack = new MusicWrapper(searchResult);
         musicTrack.addToMyMusic();
     }
@@ -35,7 +35,7 @@ public class DeleteMusicTest extends BaseTest {
     @Test
     void deleteMusicTest() {
         musicPage.deleteMusic(MUSIC_TITLE);
-        Map<String, MusicWrapper> myMusic = musicPage.getMyMusic();
+        Map<String, MusicWrapper> myMusic = musicPage.goToMyMusic().getMyMusic();
         assertThat(myMusic.keySet()).doesNotContain(MUSIC_TITLE);
     }
 }

@@ -27,20 +27,20 @@ public class AddMusicTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         MainPage mainPage = loginPage.login(user);
         musicPage = mainPage.goToMusicPage();
-        musicPage.deleteAllMyMusic();
+        musicPage.goToMyMusic().deleteAllMyMusic();
     }
 
     @Test
     void addMusicTest() {
-        SelenideElement searchResult = musicPage.searchMusic(MUSIC_TITLE);
+        SelenideElement searchResult = musicPage.getMusicFromSearch(MUSIC_TITLE);
         MusicWrapper musicTrack = new MusicWrapper(searchResult);
         musicTrack.addToMyMusic();
-        Map<String, MusicWrapper> myMusic = musicPage.getMyMusic();
+        Map<String, MusicWrapper> myMusic = musicPage.goToMyMusic().getMyMusic();
         assertThat(myMusic.keySet()).contains(MUSIC_TITLE);
     }
 
     @AfterAll
     static void setDown() {
-        musicPage.deleteAllMyMusic();
+        musicPage.goToMyMusic().deleteAllMyMusic();
     }
 }

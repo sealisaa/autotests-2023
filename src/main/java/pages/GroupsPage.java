@@ -27,20 +27,21 @@ public class GroupsPage extends LoadablePage {
         $(GROUPS_CATALOG).shouldBe(Condition.visible.because("Не отображаются рекомендуемые группы"));
     }
 
-    public void goToOfficialGroups() {
+    public GroupsPage goToOfficialGroups() {
         $(OFFICIAL_GROUPS_BUTTON)
                 .shouldBe(Condition.visible.because("Не отображается кнопка Официальные"))
                 .click();
+        return this;
     }
 
-    public void joinGroup() {
-        goToOfficialGroups();
+    public GroupsPage joinGroup() {
         $(JOIN_GROUP_BUTTON)
                 .shouldBe(Condition.visible.because("Не отображается кнопка вступить"))
                 .click();
+        return this;
     }
 
-    public void goToMyGroups() {
+    public GroupsPage goToMyGroups() {
         $(MY_GROUPS_BUTTON)
                 .shouldBe(Condition.visible.because("Не отображается кнопка Показать все"))
                 .click();
@@ -48,10 +49,10 @@ public class GroupsPage extends LoadablePage {
         for (SelenideElement group : userGroupsCollection) {
             userGroups.add(group.$(USER_GROUP_TITLE).text());
         }
+        return this;
     }
 
     public List<String> getUserGroups() {
-        goToMyGroups();
         return userGroups;
     }
 }

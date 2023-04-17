@@ -1,7 +1,6 @@
 package okTests.friends;
 
 import okTests.BaseTest;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.LoginPage;
@@ -27,10 +26,9 @@ public class FriendsListTest extends BaseTest {
         MainPage mainPage = loginPage.login(user);
         FriendsPage friendsPage = mainPage.goToFriendsPage();
         Map<String, FriendCardWrapper> userFriends = friendsPage.getUserFriends();
-        assertThat(userFriends.keySet()).containsExactlyInAnyOrderElementsOf(user.getFriends());
-    }
+        assertThat(userFriends.keySet())
+                .withFailMessage("Список друзей не совпадает с ожидаемым")
+                .containsExactlyInAnyOrderElementsOf(user.getFriends());
 
-    @AfterEach
-    public void setDown() {
     }
 }

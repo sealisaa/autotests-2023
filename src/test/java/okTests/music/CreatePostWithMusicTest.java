@@ -28,8 +28,8 @@ public class CreatePostWithMusicTest extends BaseTest {
         LoginPage loginPage = new LoginPage();
         mainPage = loginPage.login(user);
         musicPage = mainPage.goToMusicPage();
-        musicPage.deleteAllMyMusic();
-        SelenideElement searchResult = musicPage.searchMusic(musicTitle);
+        musicPage.goToMyMusic().deleteAllMyMusic();
+        SelenideElement searchResult = musicPage.getMusicFromSearch(musicTitle);
         MusicWrapper musicTrack = new MusicWrapper(searchResult);
         musicTrack.addToMyMusic();
         mainPage = musicPage.close();

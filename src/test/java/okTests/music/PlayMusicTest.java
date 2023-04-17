@@ -25,7 +25,7 @@ public class PlayMusicTest extends BaseTest {
     void playMusicTest() {
         MainPage mainPage = loginPage.login(user);
         MusicPage musicPage = mainPage.goToMusicPage();
-        SelenideElement music = musicPage.searchMusic(MUSIC_TITLE);
+        SelenideElement music = musicPage.getMusicFromSearch(MUSIC_TITLE);
         musicPage.playMusic(music);
         assertThat(musicPage.getPlayingMusicTitle())
                 .isEqualToIgnoringCase(MUSIC_TITLE);

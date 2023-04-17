@@ -84,23 +84,23 @@ public class MainPage extends LoadablePage {
         $(SUBMIT_POSTING)
                 .shouldBe(Condition.visible.because("Не отображается кнопка Поделиться"))
                 .click();
-        refresh();
+        updatePosts();
+    }
+
+    public void updatePosts() {
         $(POST).shouldBe(Condition.visible.because("Не отображаются посты"));
         ElementsCollection postCollection = $$(POST);
         for (SelenideElement post : postCollection) {
-            post
-                    .shouldBe(Condition.visible.because("Не отображается пост"));
+            post.shouldBe(Condition.visible.because("Не отображается пост"));
             posts.add(new PostWrapper(post));
         }
     }
 
     public PostWrapper getPostByText(String text) {
-        for (PostWrapper post : posts) {
-            if (post.getText().equals(text)) {
-                return post;
-            }
-        }
-        return null;
+        return posts.stream()
+                .filter(post -> post.getText().equals(text))
+                .findFirst()
+                .orElse(null);
     }
 
     public String getMusicXpath(String music) {

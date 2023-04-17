@@ -36,7 +36,7 @@ public class MusicPage extends LoadablePage {
         $(COLLECTIONS_BUTTON).shouldBe(Condition.visible.because("Не отображается кнопка Коллекции"));
     }
 
-    public void goToMyMusic() {
+    public MusicPage goToMyMusic() {
         if ($(MY_MUSIC_HEADER).is(Condition.visible)) {
             refresh();
         } else {
@@ -44,18 +44,24 @@ public class MusicPage extends LoadablePage {
                     .shouldBe(Condition.visible.because("Не отображается кнопка Моя музыка"))
                     .click();
         }
+        return this;
     }
 
-    public SelenideElement searchMusic(String music) {
-        $(MUSIC_SEARCH_INPUT)
-                .shouldBe(Condition.visible.because("Не отображается поле для поиска музыки"))
-                .setValue(music)
-                .pressEnter();
+    public SelenideElement getMusicFromSearch(String music) {
+        searchMusic(music);
         $(SEARCH_RESULTS)
                 .shouldBe(Condition.visible.because("Не отображаются результаты поиска"));
         return $$(MUSIC_TRACK)
                 .shouldBe(CollectionCondition.sizeNotEqual(0).because("Ни одного трека не найдено"))
-                .get(0);
+                .get(0)
+                .shouldBe(Condition.text(music).because("Результат не соответствует введенной строке"));
+    }
+
+    public void searchMusic(String music) {
+        $(MUSIC_SEARCH_INPUT)
+                .shouldBe(Condition.visible.because("Не отображается поле для поиска музыки"))
+                .setValue(music)
+                .pressEnter();
     }
 
     public void playMusic(SelenideElement music) {
@@ -75,7 +81,6 @@ public class MusicPage extends LoadablePage {
     }
 
     public Map<String, MusicWrapper> getMyMusic() {
-        goToMyMusic();
         ElementsCollection myMusicCollection = $$(MUSIC_TRACK);
         for (SelenideElement music : myMusicCollection) {
             music
@@ -87,12 +92,10 @@ public class MusicPage extends LoadablePage {
     }
 
     public void deleteMusic(String musicTitle) {
-        goToMyMusic();
         myMusic.get(musicTitle).deleteFromMyMusic();
     }
 
     public void deleteAllMyMusic() {
-        goToMyMusic();
         for (MusicWrapper music : myMusic.values()) {
             music.deleteFromMyMusic();
         }
