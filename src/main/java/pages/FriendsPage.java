@@ -19,23 +19,19 @@ public class FriendsPage extends LoadablePage {
 
     private final Map<String, FriendCardWrapper> userFriends = new HashMap<>();
 
-    public FriendsPage() {
-        checkPage();
-    }
-
     @Override
     void checkPage() {
         $(FRIENDS_LIST)
                 .shouldBe(Condition.visible.because("Не отображается список друзей"));
+    }
+
+    public Map<String, FriendCardWrapper> getUserFriends() {
         ElementsCollection userFriendsCollection = $$(FRIEND_CARD);
         for (SelenideElement friend : userFriendsCollection) {
             friend.shouldBe(Condition.visible.because("Не отображается карточка друга"));
             FriendCardWrapper friendCard = new FriendCardWrapper(friend);
             userFriends.put(friendCard.getFriendName(), friendCard);
         }
-    }
-
-    public Map<String, FriendCardWrapper> getUserFriends() {
         return userFriends;
     }
 }

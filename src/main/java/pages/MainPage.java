@@ -29,10 +29,6 @@ public class MainPage extends LoadablePage {
 
     private final List<PostWrapper> posts = new ArrayList<>();
 
-    public MainPage() {
-        checkPage();
-    }
-
     @Override
     void checkPage() {
         $(NAME_FIELD)

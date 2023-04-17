@@ -1,6 +1,5 @@
 package okTests;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -11,9 +10,5 @@ public abstract class BaseTest {
     @BeforeAll
     static void start() {
         open(OK_URL);
-    }
-
-    @AfterAll
-    static void close() {
     }
 }

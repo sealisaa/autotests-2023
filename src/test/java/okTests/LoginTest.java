@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
 
     @AfterEach
     public void setDown() {
-//        mainPage.logout();
+        mainPage.logout();
     }
 
     Matcher<String> validUserData = new CustomMatcher<String>("Корректные имя и фамилия") {

@@ -15,7 +15,6 @@ public class GroupsPage extends LoadablePage {
     private static final By GROUPS_CATALOG = byXpath("//*[contains(@id, 'UserGroupsCatalogContent')]");
     private static final By GROUPS_MENU = byXpath("//*[contains(@id, 'UserGroupsCatalogHeader')]");
     private static final By MY_GROUPS_BUTTON = byXpath("//*[contains(@id,'MyGroupsTopBlock')]//a[contains(@hrefattrs, 'GroupsSubMenu_User_MyGroupsNav_All')]");
-//    private static final By ALL_MY_GROUPS_BUTTON = byXpath("//*[contains(@id, 'ShortcutMenu')]");
     private static final By OFFICIAL_GROUPS_BUTTON = byXpath("//a[contains(@href, 'groups/official')]");
     private static final By USER_GROUP_CARD = byXpath("//*[contains(@class, 'user-groups')]//*[contains(@data-l, 'groupCard')]");
     private static final By USER_GROUP_TITLE = byXpath(".//span");

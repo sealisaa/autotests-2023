@@ -28,10 +28,6 @@ public class MusicPage extends LoadablePage {
 
     private final Map<String, MusicWrapper> myMusic = new HashMap<>();
 
-    public MusicPage() {
-        checkPage();
-    }
-
     @Override
     void checkPage() {
         $(FOR_YOU_BUTTON).shouldBe(Condition.visible.because("Не отображается кнопка Для вас"));
@@ -47,13 +43,6 @@ public class MusicPage extends LoadablePage {
             $(MY_MUSIC_BUTTON)
                     .shouldBe(Condition.visible.because("Не отображается кнопка Моя музыка"))
                     .click();
-        }
-        ElementsCollection myMusicCollection = $$(MUSIC_TRACK);
-        for (SelenideElement music : myMusicCollection) {
-            music
-                    .shouldBe(Condition.visible.because("Не отображается музыка"));
-            MusicWrapper musicTrack = new MusicWrapper(music);
-            myMusic.put(musicTrack.getMusicTitle(), musicTrack);
         }
     }
 
@@ -87,6 +76,13 @@ public class MusicPage extends LoadablePage {
 
     public Map<String, MusicWrapper> getMyMusic() {
         goToMyMusic();
+        ElementsCollection myMusicCollection = $$(MUSIC_TRACK);
+        for (SelenideElement music : myMusicCollection) {
+            music
+                    .shouldBe(Condition.visible.because("Не отображается музыка"));
+            MusicWrapper musicTrack = new MusicWrapper(music);
+            myMusic.put(musicTrack.getMusicTitle(), musicTrack);
+        }
         return myMusic;
     }
 
